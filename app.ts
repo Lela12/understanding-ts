@@ -1,10 +1,22 @@
-function add(n1: number, n2: number) {
-  //유형을 할당하고자 하는 값 뒤에 콜론 추가
-  return n1 + n2;
+function combine(
+  input1: number | string,
+  input2: number | string,
+  resultConversion: "as-number" | "as-text" //두개의 string을 특정 type만 허용
+) {
+  let result;
+  if (
+    (typeof input1 === "number" && typeof input2 === "number") ||
+    resultConversion === "as-number" //리터럴 타입기반으로 유니언을 작성하는 것이므로 오타 x
+  ) {
+    result = +input1 + +input2;
+  } else {
+    result = input1.toString() + input2.toString();
+  }
+  return result;
+  const combinedAges = combine(30, 26, "as-number");
+  console.log(combinedAges);
+
+  const combinedStringAges = combine("30", "26", "as-number");
+
+  const combinedNames = combine("Max", "Anna", "as-text");
 }
-
-const number1 = "5";
-const number2 = 2.8;
-
-const result = add(number1, number2);
-console.log(result);
